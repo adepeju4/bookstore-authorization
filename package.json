@@ -8,7 +8,6 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Orefejo Adepeju",
-    "type": "module",
     "license": "ISC",
     "dependencies": {
         "bcrypt": "^5.0.1",

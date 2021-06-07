@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 dotenv.config();
 
 mongoose.connection.on('connected', () => {
@@ -16,7 +16,7 @@ mongoose.connection.on('error', (err) => {
 })
 
 
-export const startDb = () => {
+exports.startDb = () => {
     process.env.db;
     mongoose.connect(process.env.db, {
         keepAlive: 1,

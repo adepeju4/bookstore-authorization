@@ -1,10 +1,10 @@
-import express from 'express';
-import morgan from 'morgan';
-import bookRouter from './routes/index.js';
-import dotenv from 'dotenv';
+const express = require('express');
+const morgan = require('morgan');
+const bookRouter = require('./routes/index.js');
+const dotenv = require('dotenv');
 dotenv.config();
 
-import { startDb } from './db/index.js';
+const { startDb } = require('./db/index.js');
 
 const hostname = "localhost";
 const port = process.env.port || 3000;

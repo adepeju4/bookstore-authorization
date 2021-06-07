@@ -1,7 +1,7 @@
-import Books from '../models/bookSchema.js'
+const Books = require('../models/bookSchema.js');
 
 
-export const getBooks = async(req, res) => {
+exports.getBooks = async(req, res) => {
     try {
         const allBooks = await Books.find({}).exec();
         res.send({ data: allBooks }).end();
@@ -10,7 +10,7 @@ export const getBooks = async(req, res) => {
     }
 }
 
-export const updateBook = async(req, res) => {
+exports.updateBook = async(req, res) => {
     try {
         const { id } = req.params
         const book = req.body;
@@ -21,7 +21,7 @@ export const updateBook = async(req, res) => {
     }
 }
 
-export const postBook = async(req, res) => {
+exports.postBook = async(req, res) => {
     try {
         const newBook = req.body;
         const createBook = Books.create(newBook);
@@ -31,7 +31,7 @@ export const postBook = async(req, res) => {
     }
 }
 
-export const getBook = async(req, res) => {
+exports.getBook = async(req, res) => {
     try {
         const { id } = req.params
         const { title } = req.body;
@@ -44,7 +44,7 @@ export const getBook = async(req, res) => {
     }
 }
 
-export const deleteBook = async(req, res) => {
+exports.deleteBook = async(req, res) => {
     try {
         const { id } = req.params
         const { title } = req.body;

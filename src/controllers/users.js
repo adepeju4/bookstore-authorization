@@ -1,8 +1,8 @@
-import { User } from '../models/userSchema.js';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+const { User } = require('../models/userSchema.js');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
-export const postUserController = async(req, res) => {
+exports.postUserController = async(req, res) => {
     const { firstName, email, password } = req.body;
     //get user info
 
@@ -35,7 +35,7 @@ export const postUserController = async(req, res) => {
 };
 
 
-export const loginController = async(req, res) => {
+exports.loginController = async(req, res) => {
     const { email, password } = req.body;
     try {
         if (!email && !password) {

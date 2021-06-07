@@ -1,7 +1,7 @@
-import { Router } from 'express';
-import { getBooks, updateBook, getBook, postBook, deleteBook } from '../controllers/index.js';
-import { postUserController, loginController } from '../controllers/users.js'
-import auth from '../middlewares/auth.js';
+const { Router } = require('express');
+const { getBooks, updateBook, getBook, postBook, deleteBook } = require('../controllers/index.js');
+const { postUserController, loginController } = require('../controllers/users.js')
+const auth = require('../middlewares/auth.js');
 
 const router = Router();
 
@@ -20,4 +20,5 @@ router.delete('/books/delete/:id', auth, deleteBook);
 
 router.post('/user/register', postUserController);
 router.post('/user/login', loginController);
-export default router;
+
+module.exports = router;

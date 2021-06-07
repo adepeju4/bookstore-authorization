@@ -1,6 +1,6 @@
-import pkg from 'mongoose';
+const pkg = require('mongoose');
 
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
     firstName: {
@@ -19,4 +19,6 @@ const userSchema = new Schema({
 }, { timestamps: true });
 
 
-export const User = mongoose.model('user', userSchema);
+const User = mongoose.model('user', userSchema);
+
+module.exports = User;
