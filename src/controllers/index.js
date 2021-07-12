@@ -5,7 +5,7 @@ const path = require('path');
 
 let avatarStorage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'bookCovers');
+        cb(null, 'public/bookCovers');
     },
     filename: function(req, file, cb) {
         cb(null, uuid.v4() + path.extname(file.originalname));
