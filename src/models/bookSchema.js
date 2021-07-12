@@ -8,6 +8,9 @@ const bookSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    bookCover: {
+        type: String,
     }
 }, {
     timestamps: true

@@ -17,8 +17,8 @@ mongoose.connection.on('error', (err) => {
 
 
 exports.startDb = () => {
-    process.env.db;
-    mongoose.connect(process.env.db, {
+    console.log(process.env.DB);
+    mongoose.connect(process.env.DB, {
         keepAlive: 1,
         useNewUrlParser: true,
         useUnifiedTopology: true,

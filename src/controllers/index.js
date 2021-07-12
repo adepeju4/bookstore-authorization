@@ -1,9 +1,23 @@
 const Books = require('../models/bookSchema.js');
+const multer = require('multer');
+const uuid = require('uuid');
+const path = require('path');
+
+let avatarStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'bookCovers');
+    },
+    filename: function(req, file, cb) {
+        cb(null, uuid.v4() + path.extname(file.originalname));
+    }
+})
+
+exports.upload = multer({ storage: avatarStorage });
 
 
 exports.getBooks = async(req, res) => {
     try {
-        const allBooks = await Books.find({}).exec();
+        let allBooks = await Books.find({}).exec();
         res.send({ data: allBooks }).end();
     } catch (err) {
         console.log(err);
@@ -23,9 +37,11 @@ exports.updateBook = async(req, res) => {
 
 exports.postBook = async(req, res) => {
     try {
-        const newBook = req.body;
+        let newBook = req.body;
+        const { filename: image } = req.file;
+        newBook.bookCover = image
         const createBook = Books.create(newBook);
-        res.send(`Created new book ${JSON.stringify(createBook)}`).end()
+        res.send(`Created new book`).end()
     } catch (err) {
         console.log(err)
     }
@@ -34,7 +50,7 @@ exports.postBook = async(req, res) => {
 exports.getBook = async(req, res) => {
     try {
         const { id } = req.params
-        const { title } = req.body;
+       
         const getOneBook = await Books.findById(id).exec();
         res.send({
             data: getOneBook
@@ -44,11 +60,25 @@ exports.getBook = async(req, res) => {
     }
 }
 
+exports.addBookCover = async(req,res) => {
+    try {
+        const { id } = req.params;
+   
+    const { filename: image } = req.file;
+    const updateAvatar = await Books.findOneAndUpdate({ _id: id }, { bookCover: image }, { new: true }).exec();
+
+    res.send({ data: updateAvatar }).end();
+    console.log('book cover created or updated');
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 exports.deleteBook = async(req, res) => {
     try {
         const { id } = req.params
         const { title } = req.body;
-        const deleteBook = Books.findByIdAndDelete(id).exec();
+        await Books.findByIdAndDelete(id).exec();
         res.send({
             status: "success",
             message: `Deleted book with the title ${title}`
